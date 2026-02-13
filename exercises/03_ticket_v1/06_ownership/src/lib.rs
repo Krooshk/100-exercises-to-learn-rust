@@ -34,16 +34,19 @@ impl Ticket {
         }
     }
 
-    pub fn title(self) -> String {
-        self.title
+    pub fn title(self: &Self) -> String {
+        let t = &self.title;
+        t.clone()
     }
 
-    pub fn description(self) -> String {
-        self.description
+    pub fn description(self: &Self) -> String {
+        let t = &self.description;
+        t.clone()
     }
 
-    pub fn status(self) -> String {
-        self.status
+    pub fn status(self: &Self) -> String {
+        let t = &self.status;
+        t.clone()
     }
 }
 
