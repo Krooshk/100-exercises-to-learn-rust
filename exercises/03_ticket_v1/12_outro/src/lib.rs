@@ -11,3 +11,72 @@
 // Integration here has a very specific meaning: they test **the public API** of your project.
 // You'll need to pay attention to the visibility of your types and methods; integration
 // tests can't access private or `pub(crate)` items.
+
+pub struct Order {
+    product_name: String,
+    quantity: usize,
+    unit_price: usize,
+}
+
+impl Order {
+    pub fn new(product_name: String, quantity: usize, unit_price: usize) -> Order {
+        validate_name(&product_name);
+        validate_quantity(quantity);
+        validate_unit_price(unit_price);
+
+        Order {
+            product_name,
+            quantity,
+            unit_price,
+        }
+    }
+
+    pub fn total(&mut self) -> usize {
+        self.quantity * self.unit_price
+    }
+
+    pub fn product_name(&self) -> &String {
+        &self.product_name
+    }
+
+    pub fn quantity(&mut self) -> &usize {
+        &self.quantity
+    }
+
+    pub fn unit_price(&mut self) -> &usize {
+        &self.unit_price
+    }
+
+    pub fn set_product_name(&mut self, s: String) {
+        validate_name(&s);
+        self.product_name = s;
+    }
+
+    pub fn set_quantity(&mut self, n: usize) {
+        validate_quantity(n);
+        self.quantity = n;
+    }
+
+    pub fn set_unit_price(&mut self, n: usize) {
+        validate_unit_price(n);
+        self.unit_price = n;
+    }
+}
+
+fn validate_name(s: &String) {
+    if s.is_empty() || s.len() > 300 {
+        panic!();
+    }
+}
+
+fn validate_quantity(n: usize) {
+    if n <= 0 {
+        panic!();
+    }
+}
+
+fn validate_unit_price(n: usize) {
+    if n <= 0 {
+        panic!();
+    }
+}
